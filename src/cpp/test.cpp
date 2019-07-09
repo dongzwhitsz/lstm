@@ -5,6 +5,11 @@
 #include "../../input/mnist/train/3_1.h"
 #include "../../input/mnist/train/4_9.h"
 #include "../../input/mnist/train/5_2.h"
+#include "../../input/mnist/train/6_1.h"
+#include "../../input/mnist/train/7_3.h"
+#include "../../input/mnist/train/8_1.h"
+#include "../../input/mnist/train/9_4.h"
+
 #include "../include/utils.h"
 #include "../include/dense.h"
 #include "../include/lstm.h"
@@ -17,7 +22,12 @@ int main()
     // data_t arr[28][28] = IMG_1_0;
     // data_t arr[28][28] = IMG_2_4;
     // data_t arr[28][28] = IMG_3_1;
-    data_t arr[28][28] = IMG_4_9;
+    // data_t arr[28][28] = IMG_4_9;
+    // data_t arr[28][28] = IMG_5_2;
+    // data_t arr[28][28] = IMG_6_1; //
+    // data_t arr[28][28] = IMG_7_3;
+    // data_t arr[28][28] = IMG_8_1;
+    data_t arr[28][28] = IMG_9_4;
     for(int i = 0; i < 28; ++i)
     {
         for(int j = 0; j < 28; ++j)

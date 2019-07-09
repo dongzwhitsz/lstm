@@ -21,5 +21,4 @@ void Network::forward()
     this->lstm.forward(&input);  // input: TIME_STEPS*TIME_STEPS 输出 1 x 256    
     this->dense.forward(&this->lstm.h); // dense NUM_UNITS*NUM_UNITS 输出 1 x 256    
     this->softmax.forward(&this->dense.output); // 输出 1 * 10    
-    this->softmax.output.softmax();
 }

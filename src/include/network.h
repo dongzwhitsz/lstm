@@ -4,7 +4,7 @@
 #include "dense.h"
 #include "softmax.h"
 
-// 权重的初始化文件 
+// 权重的初始化文件
 #include "../../weight/dense_kernel.h"
 #include "../../weight/dense_bias.h"
 #include "../../weight/lstm_bias_i.h"
@@ -34,7 +34,7 @@ public:
     Matrix input = Matrix((data_t *)arr_input, 28, 28);
     // 其输出为一个 10维向量；
     // data_t arr_output[1][10];
-    // Matrix output = Matrix((data_t *)arr_output, 1, 10);  
+    // Matrix output = Matrix((data_t *)arr_output, 1, 10);
 
     LSTM lstm = LSTM(&w_lstm);
     Dense dense = Dense(&dense_kernel, &dense_bias);
@@ -52,7 +52,7 @@ private:
     Matrix kernel_f = Matrix((data_t *)arr_kernel_f, TIME_STEPS, NUM_UNITS);
     Matrix kernel_c = Matrix((data_t *)arr_kernel_c, TIME_STEPS, NUM_UNITS);
     Matrix kernel_o = Matrix((data_t *)arr_kernel_o, TIME_STEPS, NUM_UNITS);
-    
+
     // 与h相乘
     data_t arr_recurrent_kernel_i[NUM_UNITS][NUM_UNITS] = W_LSTM_RECURRENT_KERNEL_I;
     data_t arr_recurrent_kernel_f[NUM_UNITS][NUM_UNITS] = W_LSTM_RECURRENT_KERNEL_F;
@@ -60,7 +60,7 @@ private:
     data_t arr_recurrent_kernel_o[NUM_UNITS][NUM_UNITS] = W_LSTM_RECURRENT_KERNEL_O;
     Matrix recurrent_kernel_i = Matrix((data_t *) arr_recurrent_kernel_i, NUM_UNITS, NUM_UNITS);
     Matrix recurrent_kernel_f = Matrix((data_t *) arr_recurrent_kernel_f, NUM_UNITS, NUM_UNITS);
-    Matrix recurrent_kernel_c = Matrix((data_t *) arr_recurrent_kernel_c, NUM_UNITS, NUM_UNITS); 
+    Matrix recurrent_kernel_c = Matrix((data_t *) arr_recurrent_kernel_c, NUM_UNITS, NUM_UNITS);
     Matrix recurrent_kernel_o = Matrix((data_t *) arr_recurrent_kernel_o, NUM_UNITS, NUM_UNITS);
 
     data_t arr_bias_i[NUM_UNITS] = LSTM_BIAS_I;
@@ -71,7 +71,7 @@ private:
     Matrix bias_f = Matrix((data_t *)arr_bias_f, 1, NUM_UNITS);
     Matrix bias_c = Matrix((data_t *)arr_bias_c, 1, NUM_UNITS);
     Matrix bias_o = Matrix((data_t *)arr_bias_o, 1, NUM_UNITS);
-    LSTM_weight w_lstm = LSTM_weight( 
+    LSTM_weight w_lstm = LSTM_weight(
         &kernel_i, &kernel_f, &kernel_c, &kernel_o,
         &recurrent_kernel_i, &recurrent_kernel_f, &recurrent_kernel_c, &recurrent_kernel_o,
         &bias_i, &bias_f, &bias_c, &bias_o
@@ -87,5 +87,5 @@ private:
     data_t arr_softmax_kernel[NUM_UNITS][10] = W_SOFTMAX_KERNEL;
     Matrix softmax_kernel = Matrix((data_t *)arr_softmax_kernel, NUM_UNITS, 10);
     data_t arr_softmax_bias[10] = W_SOFTMAX_BIAS;
-    Matrix softmax_bias = Matrix((data_t *)arr_softmax_bias, 1, 10); 
+    Matrix softmax_bias = Matrix((data_t *)arr_softmax_bias, 1, 10);
 };

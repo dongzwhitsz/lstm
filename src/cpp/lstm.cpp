@@ -34,7 +34,7 @@ Matrix LSTM::forward(Matrix *x_in)
     this->set_zeros();
     for(int i = 0; i < TIME_STEPS; ++i)
     {
-        // #define VAR  (this->c)
+        // #define VAR  (this->h)
         // for(int i = 0; i<VAR.n_row; ++i)
         // {
         //     for(int j = 0; j < VAR.n_col; ++j)
@@ -44,7 +44,7 @@ Matrix LSTM::forward(Matrix *x_in)
         //     cout << endl;
         // }
         // cout << "n_row: " << VAR.n_row << " n_col: " << VAR.n_col<< endl;
-        // cout << endl;
+        // cout << "i: " << i << endl;
 
         this->copy_matrix_line(x_in, &p_in, i);
         forward_once(&p_in);

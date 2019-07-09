@@ -54,9 +54,21 @@ void Matrix::hard_sigmoid()
         for( int j = 0; j < this-> n_col; ++j)
         {
             data_t _v = this->get_value(i, j);
-            _v = ((_v + 1)/2 < 1 )?(_v + 1) / 2: 1;
-            _v = (_v > 0)? _v: 0; 
+
+            // _v = ((_v + 1)/2 < 1 )?(_v + 1) / 2: 1;
+            // _v = (_v > 0)? _v: 0; 
+            // this->set_value(i, j, _v);
+            
+            _v = 0.2 * _v + 0.5;
+            if( _v >2.5)
+            {
+                _v = 1;
+            }else if(_v < -2.5)
+            {
+                _v = 0;
+            }
             this->set_value(i, j, _v);
+            
         }
     }
 }

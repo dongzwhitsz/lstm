@@ -3,7 +3,7 @@
 #include <assert.h>
 using namespace std;
 
-typedef float data_t;
+typedef long double data_t;
 
 class Data
 {
