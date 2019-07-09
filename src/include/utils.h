@@ -3,7 +3,7 @@
 #include <assert.h>
 using namespace std;
 
-typedef long double data_t;
+typedef double data_t;
 
 class Data
 {
