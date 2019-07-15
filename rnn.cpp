@@ -1,47 +1,44 @@
-#include <iostream>
-#include <cmath>
-using namespace std;
 
-#include "./weight/dense_bias.h"
-#include "./weight/dense_kernel.h"
+#include "../weight/dense_bias.h"
+#include "../weight/dense_kernel.h"
 
-#include "./weight/lstm_kernel_o.h"
-#include "./weight/lstm_kernel_c.h"
-#include "./weight/lstm_kernel_f.h"
-#include "./weight/lstm_kernel_i.h"
-#include "./weight/lstm_bias_c.h"
-#include "./weight/lstm_bias_f.h"
-#include "./weight/lstm_bias_i.h"
-#include "./weight/lstm_bias_o.h"
-#include "./weight/lstm_recurrent_kernel_c.h"
-#include "./weight/lstm_recurrent_kernel_f.h"
-#include "./weight/lstm_recurrent_kernel_i.h"
-#include "./weight/lstm_recurrent_kernel_o.h"
-#include "./weight/softmax_bias.h"
-#include "./weight/softmax_kernel.h"
+#include "../weight/lstm_kernel_o.h"
+#include "../weight/lstm_kernel_c.h"
+#include "../weight/lstm_kernel_f.h"
+#include "../weight/lstm_kernel_i.h"
+#include "../weight/lstm_bias_c.h"
+#include "../weight/lstm_bias_f.h"
+#include "../weight/lstm_bias_i.h"
+#include "../weight/lstm_bias_o.h"
+#include "../weight/lstm_recurrent_kernel_c.h"
+#include "../weight/lstm_recurrent_kernel_f.h"
+#include "../weight/lstm_recurrent_kernel_i.h"
+#include "../weight/lstm_recurrent_kernel_o.h"
+#include "../weight/softmax_bias.h"
+#include "../weight/softmax_kernel.h"
 
-#include "./img/0_5.h"
-#include "./img/1_0.h"
-#include "./img/2_4.h"
-#include "./img/0_5.h"
-#include "./img/1_0.h"
-#include "./img/3_1.h"
-#include "./img/4_9.h"
-#include "./img/5_2.h"
-#include "./img/6_1.h"
-#include "./img/7_3.h"
-#include "./img/8_1.h"
-#include "./img/9_4.h"
+//#include "./img/0_5.h"
+//#include "./img/1_0.h"
+//#include "./img/2_4.h"
+//#include "./img/0_5.h"
+//#include "./img/1_0.h"
+//#include "./img/3_1.h"
+//#include "./img/4_9.h"
+//#include "./img/5_2.h"
+//#include "./img/6_1.h"
+//#include "./img/7_3.h"
+//#include "./img/8_1.h"
+//#include "./img/9_4.h"
 
 
 typedef float data_t;
 
 
 #define IMG_S  28
-#define NUM_UNITS  256
-#define DENSE_UNITS 256
+#define NUM_UNITS  128
+#define DENSE_UNITS 128
 
-// 暴力枚举网络各处参数
+// 鏆村姏鏋氫妇缃戠粶鍚勫鍙傛暟
 /************* LSTM params ****************/
 data_t c[NUM_UNITS] = {0};
 data_t h[NUM_UNITS] = {0};
@@ -84,7 +81,7 @@ void softmax_forward(data_t dense_output[DENSE_UNITS]);
 /*********************** function realizaton ************************************* */
 void top(data_t img[IMG_S][IMG_S], data_t output[10])
 {
-    // 首先预处理图片
+    // 棣栧厛棰勫鐞嗗浘锟�?
    img_preprocess(img);
    lstm_forward(img);       
    dense_forward(h);
@@ -96,30 +93,30 @@ void top(data_t img[IMG_S][IMG_S], data_t output[10])
    }
 }
 
-
-int main()
-{
-    // test bench for the top function in g++;
-    // data_t arr[28][28] = IMG_0_5;
-    // data_t arr[28][28] = IMG_1_0;
-    // data_t arr[28][28] = IMG_2_4;
-    // data_t arr[28][28] = IMG_3_1;
-    // data_t arr[28][28] = IMG_4_9;
-    data_t arr[28][28] = IMG_5_2;
-    // data_t arr[28][28] = IMG_6_1; 
-    // data_t arr[28][28] = IMG_7_3;
-    // data_t arr[28][28] = IMG_8_1;
-    // data_t arr[28][28] = IMG_9_4;
-    data_t output[10] = {0};
-    top(arr, output);
-
-    for(int i = 0; i < 10; i ++)
-    {
-        cout <<  i << ": " << output[i] << endl;
-    }
-    cout << endl;
-    return 0;
-}
+//
+//int main()
+//{
+//    // test bench for the top function in g++;
+//    // data_t arr[28][28] = IMG_0_5;
+//    // data_t arr[28][28] = IMG_1_0;
+//    // data_t arr[28][28] = IMG_2_4;
+//    // data_t arr[28][28] = IMG_3_1;
+//    // data_t arr[28][28] = IMG_4_9;
+//    data_t arr[28][28] = IMG_5_2;
+//    // data_t arr[28][28] = IMG_6_1;
+//    // data_t arr[28][28] = IMG_7_3;
+//    // data_t arr[28][28] = IMG_8_1;
+//    // data_t arr[28][28] = IMG_9_4;
+//    data_t output[10] = {0};
+//    top(arr, output);
+//
+//    for(int i = 0; i < 10; i ++)
+//    {
+//        cout <<  i << ": " << output[i] << endl;
+//    }
+//    cout << endl;
+//    return 0;
+//}
 
 void img_preprocess(data_t img[IMG_S][IMG_S])
 {
@@ -151,7 +148,7 @@ void lstm_forward_once(data_t img_line[IMG_S])
 {
     /************** forget gate *************** */
     data_t arr1[NUM_UNITS] = {0};
-    // img_line 与 权重作用
+    // img_line 锟�? 鏉冮噸浣滅敤
     for(int i = 0; i < NUM_UNITS; ++i)
     {
         for(int j = 0; j < IMG_S; ++j)
@@ -183,7 +180,7 @@ void lstm_forward_once(data_t img_line[IMG_S])
 
     /************** input gate *************** */
     data_t arr4[NUM_UNITS] = {0};
-    // img_line 与 权重作用
+    // img_line 锟�? 鏉冮噸浣滅敤
     for(int i = 0; i < NUM_UNITS; ++i)
     {
         for(int j = 0; j < IMG_S; ++j)
@@ -215,7 +212,7 @@ void lstm_forward_once(data_t img_line[IMG_S])
 
  /************** candidate gate *************** */
     data_t arr7[NUM_UNITS] = {0};
-    // img_line 与 权重作用
+    // img_line 锟�? 鏉冮噸浣滅敤
     for(int i = 0; i < NUM_UNITS; ++i)
     {
         for(int j = 0; j < IMG_S; ++j)
@@ -248,7 +245,7 @@ void lstm_forward_once(data_t img_line[IMG_S])
 
     /************** output gate *************** */
     data_t arr10[NUM_UNITS] = {0};
-    // img_line 与 权重作用
+    // img_line 锟�? 鏉冮噸浣滅敤
     for(int i = 0; i < NUM_UNITS; ++i)
     {
         for(int j = 0; j < IMG_S; ++j)
@@ -279,11 +276,6 @@ void lstm_forward_once(data_t img_line[IMG_S])
         {
             arr12[i] = 0;
         }
-        // arr12[i] = 0.8 * arr12[i];
-        // if (arr12[i] > 1)
-        //     arr12[i] = 1;
-        // else if (arr12[i] < -1)
-        //     arr12[i] = -1;
     }
 
     // get the c and h
@@ -351,15 +343,15 @@ void softmax_forward(data_t dense_output[DENSE_UNITS])
     {
         softmax_output[i] += softmax_bias[i];
     }
-    // don't need to do the exp in forward step;
-    data_t s = 0;
-    for(int i = 0 ; i < 10; i ++)
-    {
-        softmax_output[i] = exp(softmax_output[i]);
-        s += softmax_output[i];
-    }
-    for(int i = 0; i < 10; i ++)
-    {
-        softmax_output[i] = softmax_output[i] / s;
-    }
+//    // don't need to do the exp in forward step;
+//    data_t s = 0;
+//    for(int i = 0 ; i < 10; i ++)
+//    {
+//        softmax_output[i] = exp(softmax_output[i]);
+//        s += softmax_output[i];
+//    }
+//    for(int i = 0; i < 10; i ++)
+//    {
+//        softmax_output[i] = softmax_output[i] / s;
+//    }
 }
